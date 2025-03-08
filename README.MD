@@ -6,6 +6,10 @@
 
 Для корректной работы требуется иметь установленный в системе Docker или Docker Desktop.
 
+Исходный код используемых образов бэкенда и фронтенда:  
+https://github.com/greenem-official/RouteNavigator-Backend  
+https://github.com/greenem-official/RouteNavigator-Frontend  
+
 ## Основные команды
 
 ### Создание контейнера

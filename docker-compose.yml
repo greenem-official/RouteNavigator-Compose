@@ -42,8 +42,11 @@ services:
     ports:
       - "5678:5678"
     environment:
+      VITE_APP_ENV: production
       VUE_APP_BACKEND_HOST: route_navigation_backend
       VUE_APP_BACKEND_PORT: 8080
+    volumes:
+      - routenav_frontend_volume:/var/lib/routenav_frontend/
     networks:
       - routenav_network
 
@@ -53,3 +56,4 @@ networks:
 volumes:
   routenav_postgres_volume:
   routenav_backend_volume:
+  routenav_frontend_volume:

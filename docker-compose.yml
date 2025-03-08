@@ -1,0 +1,56 @@
+services:
+  route_navigation_postgres:
+    image: postgres:latest
+    container_name: routenav_postgres
+    restart: always
+    ports:
+      - "5402:5432"
+    environment:
+      POSTGRES_USER: ivan
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: maindb
+    networks:
+      - routenav_network
+    volumes:
+      - routenav_postgres_volume:/var/lib/postgresql/data
+      - ./postgres_data/initial_postgres_data.sql:/docker-entrypoint-initdb.d/init.sql
+
+  route_navigation_backend:
+    image: d4ylight/route-navigation-backend:latest
+    container_name: routenav_backend
+    restart: always
+    depends_on:
+      - route_navigation_postgres
+    networks:
+      - routenav_network
+    environment:
+      SPRING_PROFILES_ACTIVE: postgresql  # choose postgresql or sqlite
+      DB_HOST: route_navigation_postgres
+      DB_PORT: 5432
+      DB_NAME: maindb
+      DB_USER: ivan
+      DB_PASSWORD: 123456
+    volumes:
+      - routenav_backend_volume:/var/lib/routenav_backend/
+    
+  route_navigation_frontend:
+    image: d4ylight/route-navigation-frontend:latest
+    container_name: routenav_frontend
+    restart: always
+    depends_on:
+      - route_navigation_backend
+    ports:
+      - "5678:5678"
+    environment: # all not used atm
+      FRONTEND_PORT: 5678
+      BACKEND_HOST: route_navigation_backend
+      BACKEND_PORT: 8080
+    networks:
+      - routenav_network
+
+networks:
+  routenav_network:
+
+volumes:
+  routenav_postgres_volume:
+  routenav_backend_volume:

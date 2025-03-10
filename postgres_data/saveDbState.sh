@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_CONTAINER_NAME="routes_postgres_container"
+DOCKER_CONTAINER_NAME="routenav_testenv_postgres_container"
 POSTGRES_USER="ivan"
 POSTGRES_DB="maindb"
 BACKUP_FILE="initial_postgres_data.sql"

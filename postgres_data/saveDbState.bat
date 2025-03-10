@@ -1,6 +1,6 @@
 @echo off
 
-SET DOCKER_CONTAINER_NAME=routes_postgres_container
+SET DOCKER_CONTAINER_NAME=routenav_testenv_postgres_container
 SET POSTGRES_USER=ivan
 SET POSTGRES_DB=maindb
 SET BACKUP_FILE=initial_postgres_data.sql
